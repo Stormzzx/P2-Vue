@@ -10,11 +10,11 @@
 import { onMounted, ref } from 'vue';
   const refeicao =ref([]);
   const categoria =ref([]);
-  const getRefeicao= (parametro)=> fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
+  const getRefeicao= (parametro)=> fetch("https://www.themealdb.com/api/json/v1/1/categories.php"+parametro)
   .then(res=>res.json())
   .then(resultado=> refeicao.value= resultado.categories);
 
-  const getCategoria=()=> fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c="+parametro)
+  const getCategoria=(parametro)=> fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c="+parametro)
   .then(res=>res.json())
   .then(resultado=> refeicao.value=resultado.meals)
   onMounted(
