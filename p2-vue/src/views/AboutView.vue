@@ -2,7 +2,7 @@
   <button @click="getCategoria('Pasta')">Refeicao</button>
   <div style="display: flex; gap: 5px; flex-wrap: wrap;">
     <button @click="getCategoria(prato.strCategory)">
-    <img src="prato.strCategoryThumb" alt=""></button>
+    <img src="" alt=""></button>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import { onMounted, ref } from 'vue';
 
   const getCategoria=(parametro)=> fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c="+parametro)
   .then(res=>res.json())
-  .then(resultado=> refeicao.value=resultado.meals)
+  .then(resultado=> categoria.value=resultado.meals)
   onMounted(
     ()=>{
       getRefeicao()

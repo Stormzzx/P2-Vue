@@ -1,21 +1,24 @@
 <template>
-    {{ carrinho }}
+    {{ store.carrinhoCompras }}
     <br>
     <input type="text" v-model="pesquisa">
     <button @click="getMeal(pesquisa)">search</button>
     <div style="display: fle; flex-wrap: wrap; gap: 10px; ">
-        <div v-for="item in meal" style="display: flex; background-color: grey; flex-direction: column; align-items: center;">
+        <div v-for="item in meal" style="display: flex; padding: 5px;background-color: grey; flex-direction: column; align-items: center;">
             <img :src="item.strMealThumb" alt="" width="75">
             {{ item.strMeal }}
-            <button @click="()=>carrinho.push(item.strMeal)">comprar</button>
+            <button @click="()=>store.updateCarrinhoCompras(item)">comprar</button>
         </div>
     </div>
 </template>
 <script setup>
+import { useCounterStore } from '@/stores/counter';
 import { ref } from 'vue';
+const store =  useCounterStore()
+
 const meal = ref('')
 const pesquisa = ref('')
-const carrinho=ref([1,2,3])
+//const carrinho=ref([]);
 const getMeal = (refeicao) => fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + refeicao)
     .then(dados => dados.json())
     .then(resultado => meal.value = resultado.meals)
